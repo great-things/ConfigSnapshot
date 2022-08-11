@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+# This script is the logic portion of the UI.
+# It uses standard output (echo) to send events to the UI, and it uses standard input (read) to receive them.
+# Events have this structure:
+## <name> <argumentCount>
+## <firstArgument>
+## <secondArgument>
+## ...
+# So an event with two arguments needs three lines
+# Why do we need this abstraction? Because it allows us to use different UIs for different platforms, while using the same logic.
+# For example, we could have a macOS version which uses native macOS controls, and a Linux version that uses native Linux controls.
+
+# This is where the actual script begins
+echo "changeTitle 1"
+echo "ConfigSnapshot"
+
+#Read the currently available configurations and show them
+for config in $HOME/.greatthings/files/ConfigSnapshot/snapshots/*
+do
+    # Add a new item to the list
+    echo "addItem 1"
+    echo "$(basename $config)"
+done
+
+# This is the "event loop"
+while read line
+do
+    >&2 echo "$line"
+    
+    case "$line" in
+        "QUIT 0")
+            exit 0
+            ;;
+        "onInput 1")
+            # Here we have to create a new snapshot
+            # That is easy enough - just use the cli/save.sh script with the given name
+            read item
+            bash "$(dirname $0)/../cli/save.sh" "$item"
+            # Reflect this change in the UI by adding a list item
+            echo "addItem 1"
+            echo "$item"
+            ;;
+        "onItemSelected 1")
+            # We have to apply the saved configuration now
+            # Just use the "cli/load.sh" script
+            read item
+            bash "$(dirname $0)/../cli/load.sh" "$item"
+            # Nothing else to do; UI is up to date
+            ;;
+    esac
+done
