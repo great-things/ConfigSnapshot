@@ -19,6 +19,7 @@ def onQuit(arg):
     Gtk.main_quit()
 
 win = Gtk.Window()
+win.set_default_size(400, 300)
 win.connect("destroy", onQuit)
 
 def onButtonClicked(arg):
@@ -37,9 +38,11 @@ layout = Gtk.Box(spacing = 7, orientation = Gtk.Orientation.VERTICAL)
 win.add(layout)
 
 inputLayout = Gtk.Box(spacing = 7)
+inputLayout.set_hexpand(True)
 layout.add(inputLayout)
 
 textField = Gtk.Entry()
+textField.set_hexpand(True)
 inputLayout.add(textField)
 
 button = Gtk.Button(label = "+ Add")
@@ -51,6 +54,7 @@ inputLayout.add(button)
 store = Gtk.ListStore(str)
 
 tree = Gtk.TreeView(model=store)
+tree.set_vexpand(True)
 renderer = Gtk.CellRendererText()
 column = Gtk.TreeViewColumn("List", renderer, text=0, weight=1)
 tree.append_column(column)
