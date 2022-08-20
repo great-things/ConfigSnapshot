@@ -3,13 +3,13 @@ This folder contains terminal tools to store and restore snapshots of your deskt
 Snapshots are stored in `~/.greatthings/files/ConfigSnapshot/snapshots`.
 
 ## action.sh
-Performs an action using the given backend from "backend.txt" and a configuration name. Can be run from any folder.
+Performs an action using the given backend from [backend.txt](#backendtxt) and a configuration name. Can be run from any folder.
 
 ## save.sh
 This script is used to save a snapshot. Same as `action.sh save ...`
 
 ## load.sh
-This script is used to save a snapshot. Same as `action.sh load ...`
+This script is used to load a snapshot. Same as `action.sh load ...`
 
 ## backends/
 This folder contains the specific commands for each desktop environment to save and load its settings.
