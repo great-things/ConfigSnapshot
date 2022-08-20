@@ -1,3 +1,7 @@
+# Performs a given action (first parameter) with a snapshot (second parameter).
+# This requires a backend configuration in $HOME/.greatthings/files/ConfigSnapshot/backend.txt
+# For more info on how to create the backend configuration, look at the README file in this folder.
+
 # Read parameters
 action="$1"
 configName="$2"
@@ -11,7 +15,7 @@ configurationFolder="$HOME/.greatthings/files/ConfigSnapshot/snapshots/$configNa
 mkdir -p "$configurationFolder"
 
 # Figure out which desktop environment we are using (backend.txt)
-environmentName="$(cat $scriptsFolder/backend.txt)"
+environmentName="$(cat $HOME/.greatthings/files/ConfigSnapshot/backend.txt)"
 
 # Run the appropriate "save.sh" script, with $scriptsFolder as the parameter so we know where to save things
 bash "$scriptsFolder/backends/$environmentName/$action.sh" "$configurationFolder"

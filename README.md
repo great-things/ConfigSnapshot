@@ -10,10 +10,12 @@ Apparently an app like this does not exist, or I have been unable to find it - s
 ## Notes and opportunities to help
 Note: this is a very early version with a *very* unfinished UI. If you want to help me make it nicer, please do. I tried to document the main project structure somewhat well, so hopefully you can figure out what is going on.
 
-Currently, the app only works on Linux with the XFCE desktop, or with Cinnamon if you configure it accordingly (see "Installation"). If you want to help me add support for another environment, please take a look at the `cli/backends` folder, where you can find the implementations for XFCE and Cinnamon - it should be possible to create another supported backend based on that.
+Currently, the app only works on Linux with the XFCE desktop, or with Cinnamon. If you want to help me add support for another environment, please take a look at the `cli/backends` folder, where you can find the implementations for XFCE and Cinnamon - it should be possible to create another supported backend based on that.
 
 ## Installation
+Currently, the app only works on Linux with the XFCE desktop, or with Cinnamon.
+
 * Clone this repo and navigate into the cloned folder
 * Make sure you have `python3` and `xfce4-panel-profiles` (if you use XFCE) installed
-* If you use the Cinnamon desktop, change the contents of `cli/backend.txt` to `cinnamon`
+* Run `bash ./cli/configureLinuxBackend.sh` to detect the desktop environment you are running
 * Run `bash ./gui/run.sh` to start the app
