@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Version=0.6
+Name=ConfigSnapshot
+Comment=Save and restore your desktop configurations, and quickly switch between them.
+
