@@ -16,7 +16,10 @@ Currently, the app only works on Linux with the XFCE desktop, or with Cinnamon. 
 Currently, the app only works on Linux with the XFCE desktop, or with Cinnamon.
 
 * Clone this repo and navigate into the cloned folder
-* Make sure you have `python3` and `xfce4-panel-profiles` (if you use XFCE) installed
+* Make sure you have the following dependencies installed:
+	* `python3`
+	* `decoupled-connect` (https://github.com/great-things/decoupled-connect), which depends on `node` (https://nodejs.org/)
+	* `xfce4-panel-profiles` (if you use XFCE) installed
 * Run `bash ./cli/configureLinuxBackend.sh` to detect the desktop environment you are running
-* Run `bash ./gui/addToLinuxMenu.sh` if you want to add a shortcut to your menu. This shortcut is called "ConfigSnapshot"; it might only show up after you log out and back in.
+* Run `bash "$(pwd)/gui/addToLinuxMenu.sh"` if you want to add a shortcut to your menu. This shortcut is called "ConfigSnapshot"; it might only show up after you log out and back in.
 * Either click on the menu shortcut, or run `bash ./gui/run.sh` to start the app

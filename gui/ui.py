@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # https://python-gtk-3-tutorial.readthedocs.io/en/latest/introduction.html
 # https://realpython.com/python-lambda/
 # https://docs.python.org/3/tutorial/inputoutput.html
@@ -7,15 +9,13 @@ import gi
 import threading
 import sys
 import subprocess
-proc = subprocess.Popen([sys.argv[1]],stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 def onQuit(arg):
-    proc.stdin.write("QUIT 0\n".encode())
-    proc.stdin.flush()
+    sys.stdout.write("QUIT 0\n")
+    sys.stdout.flush()
     Gtk.main_quit()
 
 win = Gtk.Window()
@@ -23,15 +23,15 @@ win.set_default_size(400, 300)
 win.connect("destroy", onQuit)
 
 def onButtonClicked(arg):
-    proc.stdin.write("onInput 1\n".encode())
-    proc.stdin.write((textField.get_text() + "\n").encode())
-    proc.stdin.flush()
+    sys.stdout.write("onInput 1\n")
+    sys.stdout.write(textField.get_text() + "\n")
+    sys.stdout.flush()
 
 def onItemSelected(widget, row, col):
     item = widget.get_model()[row][0]
-    proc.stdin.write("onItemSelected 1\n".encode())
-    proc.stdin.write((item + "\n").encode())
-    proc.stdin.flush()
+    sys.stdout.write("onItemSelected 1\n")
+    sys.stdout.write((item + "\n"))
+    sys.stdout.flush()
 
 # Add the UI
 layout = Gtk.Box(spacing = 7, orientation = Gtk.Orientation.VERTICAL)
@@ -70,22 +70,23 @@ counter = 0
 
 def check_input():
    # While process is alive ...
-   while proc.poll() is None:
-      event = proc.stdout.readline().decode().rstrip("\n")
+   while True:
+      event = input()
       print(event, file=sys.stderr)
       if event == "addItem 1":
-      	store.append([proc.stdout.readline().decode().rstrip("\n")])
+      	store.append([input()])
       if event == "changeButtonText 1":
-      	button.set_label(proc.stdout.readline().decode())
+      	button.set_label(input())
       if event == "changeTitle 1":
-      	win.set_title(proc.stdout.readline().decode())
+      	win.set_title(input())
       if event == "QUIT 0":
       	Gtk.main_quit()
+      	exit()
 threading.Thread(target = check_input).start()
 
 # Start the app
-proc.stdin.write("START 0\n".encode())
-proc.stdin.flush()
+sys.stdout.write("START 0\n")
+sys.stdout.flush()
 
 win.show_all()
 Gtk.main()

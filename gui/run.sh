@@ -1,1 +1,1 @@
-python3 "$(dirname $0)/ui.py" "$(dirname $0)/logic"
+decoupled-connect "$(dirname $0)/ui.py" "$(dirname $0)/logic"
