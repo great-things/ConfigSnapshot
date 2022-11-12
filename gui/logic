@@ -16,6 +16,8 @@ echo "changeTitle 1"
 echo "ConfigSnapshot"
 
 #Read the currently available configurations and show them
+#The IFS variable needs to be set, otherwise spaces in configuration names would not be handled properly
+IFS=$(echo -en "\n\b")
 for config in $HOME/.greatthings/files/ConfigSnapshot/snapshots/*
 do
     # Add a new item to the list
